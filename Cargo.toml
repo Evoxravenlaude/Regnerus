@@ -1,0 +1,40 @@
+[package]
+name = "regnerus"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+description = "Regnerus: a Solana wallet watcher and copy trader that follows traders as entities, not addresses"
+publish = false
+
+[[bin]]
+name = "regnerus"
+path = "src/main.rs"
+
+[dependencies]
+async-trait = "0.1.92"
+base64 = "0.22"
+bs58 = "0.5.1"
+chrono = { version = "0.4.45", default-features = false, features = ["std", "clock"] }
+curve25519-dalek = "4"
+ed25519-dalek = "2"
+futures-util = { version = "0.3.34", default-features = false, features = ["std", "sink"] }
+getrandom = "0.3"
+log = { version = "0.4.35", features = ["std"] }
+parking_lot = "0.13.0"
+reqwest = { version = "0.13.5", default-features = false, features = ["json", "gzip", "query", "rustls-no-provider"] }
+rustls = { version = "0.23.46", default-features = false, features = ["ring", "std", "tls12"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+sha2 = "0.10"
+sqlx = { version = "0.9.1", default-features = false, features = ["runtime-tokio", "tls-rustls-ring-webpki", "postgres", "json"] }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "macros", "time", "sync", "signal", "net"] }
+tokio-tungstenite = { version = "0.30.0", features = ["rustls-tls-webpki-roots"] }
+
+[dev-dependencies]
+tokio = { version = "1.54.1", features = ["test-util"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 4
+strip = true

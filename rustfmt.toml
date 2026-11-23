@@ -1,0 +1,4 @@
+# Wide lines, as in the Kizzy watcher: one statement per line reads better
+# here than the same statement folded over five.
+max_width = 200
+use_small_heuristics = "Max"
